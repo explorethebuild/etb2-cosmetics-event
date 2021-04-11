@@ -1,0 +1,10 @@
+name: Etb2CosmeticsEvent
+version: 0.1
+api-version: 1.16
+description: Plugin only for the ExploreTheBuild-Server
+main: dev.just.etb2cosmeticsevent.Main
+softdepend:
+  - CoreProtect
+commands:
+  eventinfo:
+    description: Gives information about the event
