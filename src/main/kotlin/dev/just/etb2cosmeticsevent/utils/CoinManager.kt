@@ -23,6 +23,12 @@ public fun addCoins(player: Player, coins: Int): Unit {
 
 public fun removeCoins(player: Player, coins: Int): Unit {
     sendActionbar(player, TextComponent("${ChatColor.RED}-${coins.toString()} Coins"))
+    val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
+    if (playerModel == null) {
+    } else {
+        playerModel.setCoins((playerModel.getCoins()!!.toInt() - coins).toString())
+        jsonDBTemplate.save<PlayerModel>(playerModel, PlayerModel::class.java)
+    }
 }
 
 private fun sendActionbar(player: Player, message: BaseComponent): Unit {
