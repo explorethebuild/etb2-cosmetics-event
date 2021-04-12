@@ -33,12 +33,16 @@ repositories {
     maven {
         url 'https://maven.enginehub.org/repo/'
     }
+    maven {
+        url 'https://dl.bintray.com/johnnyjayjay/spiglin'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
     compileOnly 'net.coreprotect:coreprotect:2.14.2'
     compile 'io.jsondb:jsondb-core:1.0.106'
+    compile 'com.github.johnnyjayjay:spiglin:2.0.4'
 }
 
 dependencies {
