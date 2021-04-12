@@ -1,6 +1,7 @@
 package dev.just.etb2cosmeticsevent
 import dev.just.etb2cosmeticsevent.commands.EventInfoCommand
 import dev.just.etb2cosmeticsevent.listeners.BreakBlockListener
+import dev.just.etb2cosmeticsevent.listeners.DeathListener
 import dev.just.etb2cosmeticsevent.listeners.JoinListener
 import dev.just.etb2cosmeticsevent.listeners.MobKillListener
 import dev.just.etb2cosmeticsevent.shop.GiveShopItemCommand
@@ -31,6 +32,7 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         pluginManager.registerEvents(JoinListener(), this)
         pluginManager.registerEvents(BreakBlockListener(), this)
         pluginManager.registerEvents(MobKillListener(), this)
+        pluginManager.registerEvents(DeathListener(), this)
     }
     private fun registerCommands(): Unit {
         getCommand("eventinfo")?.setExecutor(EventInfoCommand())
