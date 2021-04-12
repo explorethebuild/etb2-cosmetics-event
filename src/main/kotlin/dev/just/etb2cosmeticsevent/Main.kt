@@ -2,6 +2,7 @@ package dev.just.etb2cosmeticsevent
 import dev.just.etb2cosmeticsevent.commands.EventInfoCommand
 import dev.just.etb2cosmeticsevent.listeners.BreakBlockListener
 import dev.just.etb2cosmeticsevent.listeners.JoinListener
+import dev.just.etb2cosmeticsevent.listeners.MobKillListener
 import dev.just.etb2cosmeticsevent.shop.GiveShopItemCommand
 import dev.just.etb2cosmeticsevent.utils.CoreProtectHelper
 import dev.just.etb2cosmeticsevent.utils.giveOnlinePlayersCoins
@@ -29,6 +30,7 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         val pluginManager: PluginManager = Bukkit.getPluginManager()
         pluginManager.registerEvents(JoinListener(), this)
         pluginManager.registerEvents(BreakBlockListener(), this)
+        pluginManager.registerEvents(MobKillListener(), this)
     }
     private fun registerCommands(): Unit {
         getCommand("eventinfo")?.setExecutor(EventInfoCommand())
