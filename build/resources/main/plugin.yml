@@ -8,3 +8,5 @@ softdepend:
 commands:
   eventinfo:
     description: Gives information about the event
+  giveshop:
+    description: Gives the player the shop item if he has enough coins
