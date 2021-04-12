@@ -1,6 +1,7 @@
 package dev.just.etb2cosmeticsevent.listeners
 
 import dev.just.etb2cosmeticsevent.Main
+import dev.just.etb2cosmeticsevent.utils.setTab
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.ChatMessageType
 import net.md_5.bungee.api.chat.BaseComponent
@@ -19,5 +20,6 @@ class JoinListener : Listener {
         val comp2: BaseComponent = TextComponent("${ChatColor.DARK_GRAY} für weitere Informationen!")
         compc.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/eventinfo")
         event.player.spigot().sendMessage(ChatMessageType.CHAT, comp1, compc, comp2)
+        setTab(event.player)
     }
 }
