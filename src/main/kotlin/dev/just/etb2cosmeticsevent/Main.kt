@@ -1,10 +1,14 @@
 package dev.just.etb2cosmeticsevent
+import dev.just.etb2cosmeticsevent.commands.CoinManagerCommand
 import dev.just.etb2cosmeticsevent.commands.EventInfoCommand
 import dev.just.etb2cosmeticsevent.listeners.BreakBlockListener
 import dev.just.etb2cosmeticsevent.listeners.DeathListener
 import dev.just.etb2cosmeticsevent.listeners.JoinListener
 import dev.just.etb2cosmeticsevent.listeners.MobKillListener
 import dev.just.etb2cosmeticsevent.shop.GiveShopItemCommand
+import dev.just.etb2cosmeticsevent.shop.ShopInventory
+import dev.just.etb2cosmeticsevent.shop.buyableitems.BuyableItems
+import dev.just.etb2cosmeticsevent.shop.buyableitems.NoAiMobItem
 import dev.just.etb2cosmeticsevent.utils.CoreProtectHelper
 import dev.just.etb2cosmeticsevent.utils.giveOnlinePlayersCoins
 import net.coreprotect.CoreProtectAPI
@@ -33,10 +37,14 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         pluginManager.registerEvents(BreakBlockListener(), this)
         pluginManager.registerEvents(MobKillListener(), this)
         pluginManager.registerEvents(DeathListener(), this)
+        pluginManager.registerEvents(ShopInventory(), this)
+        pluginManager.registerEvents(NoAiMobItem(), this)
+        pluginManager.registerEvents(BuyableItems(), this)
     }
     private fun registerCommands(): Unit {
         getCommand("eventinfo")?.setExecutor(EventInfoCommand())
         getCommand("giveshop")?.setExecutor(GiveShopItemCommand())
+        getCommand("managecoins")?.setExecutor(CoinManagerCommand())
     }
     companion object {
         private fun coreProtectApi(): CoreProtectAPI? {
@@ -52,5 +60,6 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         val prefix: String = "${ChatColor.GRAY}[${ChatColor.BLUE}Event${ChatColor.GRAY}]${ChatColor.DARK_GRAY} "
         var instance: Plugin? = null
         val noPlayer: String = "${prefix}${ChatColor.RED}Only players can execute this command!"
+        val noPermission: String = "${prefix}${ChatColor.RED}You don't have the permissions to execute this command!"
     }
 }
