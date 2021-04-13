@@ -33,7 +33,7 @@ fun removeCoins(player: Player, coins: Int): Unit {
         newPlayerModel.setCoins(coins = (coins * -1).toString())
         jsonDBTemplate.insert<PlayerModel>(newPlayerModel)
     }
-    sendActionbar(player, TextComponent("${ChatColor.RED}-${coins.toString()} Coins"))
+    sendActionbar(player, TextComponent("${ChatColor.RED}-${coins.toString()} ${if (coins == 1) "Coin" else "Coins"} "))
     setTab(player)
 }
 
@@ -45,6 +45,28 @@ fun getCoins(player: Player): Int {
     } else {
         playerModel.getCoins()!!.toInt()
     }
+}
+
+fun setCoins(player: Player, coins: Int): Unit {
+    val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
+    if (playerModel != null) {
+        val old: Int? = playerModel.getCoins()?.toIntOrNull()
+        playerModel.setCoins((coins).toString())
+        jsonDBTemplate.save<PlayerModel>(playerModel, PlayerModel::class.java)
+        if (coins > old!!) {
+            val changedValue: Int = coins - old
+            sendActionbar(player, TextComponent("${ChatColor.GOLD}+${changedValue.toString()} ${if (changedValue == 1) "Coin" else "Coins"}"))
+        } else {
+            val changedValue: Int = old - coins
+            sendActionbar(player, TextComponent("${ChatColor.RED}-${changedValue.toString()} ${if (changedValue == 1) "Coin" else "Coins"} "))
+        }
+    } else {
+        val newPlayerModel: PlayerModel = PlayerModel()
+        newPlayerModel.setUuid(player.uniqueId.toString())
+        newPlayerModel.setCoins((coins).toString())
+        jsonDBTemplate.insert<PlayerModel>(newPlayerModel)
+    }
+    setTab(player)
 }
 
 private fun sendActionbar(player: Player, message: BaseComponent): Unit {
