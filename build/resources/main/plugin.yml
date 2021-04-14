@@ -12,3 +12,5 @@ commands:
     description: Gives the player the shop item if he has enough coins
   managecoins:
     description: An admin command to manage coins from specific player
+  startpvp:
+    description: Start the pvp event
