@@ -17,6 +17,10 @@ class BuyableItems : Listener {
                 event.isCancelled = true
                 onClickHead(event.player)
             }
+            "${org.bukkit.ChatColor.GRAY}Erhalte einen ${org.bukkit.ChatColor.BLUE}Effekt" -> {
+                event.isCancelled = true
+                onClickEffect(event.player)
+            }
             else -> return
         }
     }

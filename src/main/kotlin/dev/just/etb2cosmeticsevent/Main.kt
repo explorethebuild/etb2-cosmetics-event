@@ -7,6 +7,7 @@ import dev.just.etb2cosmeticsevent.listeners.JoinListener
 import dev.just.etb2cosmeticsevent.listeners.MobKillListener
 import dev.just.etb2cosmeticsevent.shop.GiveShopItemCommand
 import dev.just.etb2cosmeticsevent.shop.ShopInventory
+import dev.just.etb2cosmeticsevent.shop.buyableitems.BadEffectItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.BuyableItems
 import dev.just.etb2cosmeticsevent.shop.buyableitems.NoAiMobItem
 import dev.just.etb2cosmeticsevent.utils.CoreProtectHelper
@@ -40,6 +41,7 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         pluginManager.registerEvents(ShopInventory(), this)
         pluginManager.registerEvents(NoAiMobItem(), this)
         pluginManager.registerEvents(BuyableItems(), this)
+        pluginManager.registerEvents(BadEffectItem(), this)
     }
     private fun registerCommands(): Unit {
         getCommand("eventinfo")?.setExecutor(EventInfoCommand())

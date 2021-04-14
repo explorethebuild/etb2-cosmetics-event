@@ -4,6 +4,7 @@ import com.github.johnnyjayjay.spiglin.inventory.get
 import com.github.johnnyjayjay.spiglin.inventory.set
 import com.github.johnnyjayjay.spiglin.inventory.slot
 import com.github.johnnyjayjay.spiglin.item.*
+import dev.just.etb2cosmeticsevent.shop.buyableitems.badEffectItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.createHeadItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.noAiMobItem
 import dev.just.etb2cosmeticsevent.utils.getCoins
@@ -32,6 +33,7 @@ fun inventory(player: Player): Inventory {
         }
         this[slot(1,0)] = noAiMobShop
         this[slot(1,1)] = createHeadItemShop(player)
+        this[slot(1,2)] = badEffectItemShop
     }
 }
 
@@ -62,10 +64,17 @@ class ShopInventory : Listener {
                        }
                    }
                    createHeadItemShop(event.whoClicked as Player) -> {
-                       if (getCoins(event.whoClicked as Player) >= 100)
-                       removeCoins(event.whoClicked as Player, 100)
-                       event.whoClicked.inventory.addItem(createHeadItem())
+                       if (getCoins(event.whoClicked as Player) >= 100) {
+                           removeCoins(event.whoClicked as Player, 100)
+                           event.whoClicked.inventory.addItem(createHeadItem())
+                       }
                    }
+                 badEffectItemShop -> {
+                     if (getCoins(event.whoClicked as Player) >= 200) {
+                         removeCoins(event.whoClicked as Player, 200)
+                         event.whoClicked.inventory.addItem(badEffectItem)
+                     }
+                 }
              }
          }
      }
@@ -92,5 +101,12 @@ fun createHeadItemShop(player: Player): ItemStack {
             lore = listOf("${ChatColor.GRAY}Du musst ${ChatColor.BLUE}100 Coins${ChatColor.GRAY} besitzen" +
                     ", um dir dieses Items zu kaufen")
         }
+    }
+}
+val badEffectItemShop: ItemStack = item(Material.GLASS_BOTTLE) {
+    meta<ItemMeta> {
+        name = "${ChatColor.GRAY}Erhalte einen schlechten ${ChatColor.BLUE}Effekt"
+        lore = listOf("${ChatColor.GRAY}Du musst ${ChatColor.BLUE}200 Coins${ChatColor.GRAY} besitzen" +
+                ", um dir dieses Items zu kaufen")
     }
 }

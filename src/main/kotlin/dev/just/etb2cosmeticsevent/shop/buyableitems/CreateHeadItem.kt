@@ -38,7 +38,6 @@ fun createHeadItem(): ItemStack {
 
 fun removeOneHead(player: Player): Unit {
     for (i: Int in 0..35) {
-        Bukkit.getLogger().info(player.inventory.getItem(i).toString())
         if (player.inventory.getItem(i)?.itemMeta?.displayName == "${ChatColor.GRAY}Erhalte einen ${ChatColor.BLUE}Spielerkopf"){
             player.inventory.getItem(i)!!.amount = player.inventory.getItem(i)!!.amount -1
             return
