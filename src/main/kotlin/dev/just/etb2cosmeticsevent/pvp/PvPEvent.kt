@@ -1,6 +1,7 @@
 package dev.just.etb2cosmeticsevent.pvp
 
 import dev.just.etb2cosmeticsevent.Main
+import dev.just.etb2cosmeticsevent.pvp.scoreboard.PvPScoreboard
 import dev.just.etb2cosmeticsevent.utils.createTimeFromInt
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ClickEvent
@@ -93,6 +94,7 @@ fun startPvP() {
                 "Spieler ${ChatColor.BLUE}30 Coins")
         player.playSound(player.location, Sound.ENTITY_PILLAGER_CELEBRATE, 1.0F, 1.0F)
         bossBar.addPlayer(player)
+        PvPScoreboard(player)
     }
     isPvPEventActive = true
 }
@@ -111,6 +113,7 @@ fun endPvP() {
         player.sendMessage("${Main.prefix}Es bringt nun nichts mehr, andere Spieler zu töten. ")
         player.sendMessage("${Main.prefix}Hoffentlich konntest du durch das Event viele Coins verdienen!")
         player.playSound(player.location, Sound.ENTITY_PILLAGER_CELEBRATE, 1.0F, 1.0F)
+        player.scoreboard = Bukkit.getScoreboardManager()!!.mainScoreboard
     }
     playerDeathsTroughPvP = HashMap()
     playerKillsTroughPvP = HashMap()
@@ -121,10 +124,10 @@ fun endPvP() {
     object: BukkitRunnable() {
         override fun run() {
             for (player: Player in Bukkit.getOnlinePlayers()) {
-                player.sendTitle("${ChatColor.GRAY}Wie hat es dir gefallen?" +
-                        "vorbei", "${ChatColor.GRAY}Sende uns ${ChatColor.BLUE}Verbesserungsvorschläge " +
+                player.sendTitle("${ChatColor.GRAY}Wie hat es dir gefallen?",
+                "${ChatColor.GRAY}Sende uns ${ChatColor.BLUE}Verbesserungsvorschläge " +
                         "${ChatColor.GRAY}auf ${ChatColor.BLUE}Github",
-                    20, 60, 20)
+                20, 60, 20)
             }
             val text1: BaseComponent = TextComponent("${Main.prefix}Wie hat dir das Event gefallen? Sende ${ChatColor.BLUE}Verbesserungsvorschläge ${ChatColor.DARK_GRAY}auf ")
             val url: BaseComponent = TextComponent("${ChatColor.BLUE}GitHub")
@@ -150,6 +153,7 @@ fun updateBossBar() {
  */
 fun addKill(player: Player) {
     playerKillsTroughPvP[player] = playerDeathsTroughPvP.getOrDefault(player, 0) + 1
+    PvPScoreboard(player)
 }
 /**
  * Adds a death to the event stats
@@ -157,4 +161,5 @@ fun addKill(player: Player) {
  */
 fun addDeath(player: Player) {
     playerDeathsTroughPvP[player] = playerDeathsTroughPvP.getOrDefault(player, 0) + 1
+    PvPScoreboard(player)
 }

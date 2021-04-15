@@ -3,6 +3,7 @@ package dev.just.etb2cosmeticsevent.pvp.listeners
 import dev.just.etb2cosmeticsevent.Main
 import dev.just.etb2cosmeticsevent.pvp.bossBar
 import dev.just.etb2cosmeticsevent.pvp.isPvPEventActive
+import dev.just.etb2cosmeticsevent.pvp.scoreboard.PvPScoreboard
 import org.bukkit.ChatColor
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -28,6 +29,7 @@ class JoinListener: Listener {
                     "Spieler ${ChatColor.BLUE}40 Coins")
             player.playSound(player.location, Sound.ENTITY_PILLAGER_CELEBRATE, 1.0F, 1.0F)
             bossBar.addPlayer(player)
+            PvPScoreboard(player)
         }
     }
 }
