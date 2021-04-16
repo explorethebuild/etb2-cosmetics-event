@@ -22,6 +22,8 @@ class DeathAndKillListener: Listener {
             addDeath(event.entity)
             event.keepInventory = true
             event.keepLevel = true
+            event.droppedExp = 0
+            event.drops.clear()
             event.entity.sendMessage("${Main.prefix}Du bist gestorben, hast deine Items jedoch nicht verloren. ")
             event.entity.sendMessage("${Main.prefix}Achtung: Diese Einschränkung gilt nur während des PvP-Events" +
                     " und nur durch Kills durch Spieler. ")

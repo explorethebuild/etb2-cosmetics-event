@@ -22,7 +22,7 @@ class CoinManagerCommand : CommandExecutor {
             sendInformation(sender)
             return false
         }
-        var target: Player? = null
+        val target: Player?
         try {
             target = Bukkit.getPlayer(args[0])
         } catch (e: Exception) {
