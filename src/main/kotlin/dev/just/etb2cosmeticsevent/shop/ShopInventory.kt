@@ -4,6 +4,7 @@ import com.github.johnnyjayjay.spiglin.inventory.get
 import com.github.johnnyjayjay.spiglin.inventory.set
 import com.github.johnnyjayjay.spiglin.inventory.slot
 import com.github.johnnyjayjay.spiglin.item.*
+import dev.just.etb2cosmeticsevent.shop.buyableitems.adItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.badEffectItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.createHeadItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.noAiMobItem
@@ -34,6 +35,7 @@ fun inventory(player: Player): Inventory {
         this[slot(1,0)] = noAiMobShop
         this[slot(1,1)] = createHeadItemShop(player)
         this[slot(1,2)] = badEffectItemShop
+        this[slot(1,3)] = adItemShop
     }
 }
 
@@ -75,6 +77,12 @@ class ShopInventory : Listener {
                          event.whoClicked.inventory.addItem(badEffectItem)
                      }
                  }
+                 adItemShop -> {
+                     if (getCoins(event.whoClicked as Player) >= 250) {
+                         removeCoins(event.whoClicked as Player, 250)
+                         event.whoClicked.inventory.addItem(adItem)
+                     }
+                 }
              }
          }
      }
@@ -107,6 +115,13 @@ val badEffectItemShop: ItemStack = item(Material.GLASS_BOTTLE) {
     meta<ItemMeta> {
         name = "${ChatColor.GRAY}Erhalte einen schlechten ${ChatColor.BLUE}Effekt"
         lore = listOf("${ChatColor.GRAY}Du musst ${ChatColor.BLUE}200 Coins${ChatColor.GRAY} besitzen" +
+                ", um dir dieses Items zu kaufen")
+    }
+}
+val adItemShop: ItemStack = item(Material.MOJANG_BANNER_PATTERN) {
+    meta<ItemMeta> {
+        name = "${ChatColor.GRAY}Schalte eine ${ChatColor.BLUE}Werbung"
+        lore = listOf("${ChatColor.GRAY}Du musst ${ChatColor.BLUE}250 Coins${ChatColor.GRAY} besitzen" +
                 ", um dir dieses Items zu kaufen")
     }
 }
