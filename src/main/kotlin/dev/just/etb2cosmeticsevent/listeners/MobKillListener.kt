@@ -5,6 +5,7 @@ import dev.just.etb2cosmeticsevent.utils.removeCoins
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
+import org.bukkit.entity.Slime
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByEntityEvent
@@ -29,7 +30,9 @@ class MobKillListener: Listener {
             EntityType.BLAZE -> addCoins(player, 8)
             EntityType.GHAST -> addCoins(player, 8)
             EntityType.MAGMA_CUBE -> addCoins(player, 8)
-            EntityType.SLIME -> addCoins(player, 6)
+            EntityType.SLIME -> {
+                if ((event.entity as Slime).size == 3) addCoins(player, 6)
+            }
             EntityType.IRON_GOLEM -> addCoins(player,5)
             EntityType.CREEPER -> addCoins(player,4)
             EntityType.PHANTOM -> addCoins(player, 3)
