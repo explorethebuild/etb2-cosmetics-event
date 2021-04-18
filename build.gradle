@@ -48,6 +48,7 @@ dependencies {
     compile 'io.jsondb:jsondb-core:1.0.106'
     compile 'com.github.johnnyjayjay:spiglin:2.0.4'
     compile 'net.wesjd:anvilgui-1_16_R3:1.5.0-SNAPSHOT'
+    compile 'net.wesjd:anvilgui:1.5.0-SNAPSHOT'
 }
 
 dependencies {
