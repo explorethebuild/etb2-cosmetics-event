@@ -4,6 +4,7 @@ import com.github.johnnyjayjay.spiglin.inventory.get
 import com.github.johnnyjayjay.spiglin.inventory.set
 import com.github.johnnyjayjay.spiglin.inventory.slot
 import com.github.johnnyjayjay.spiglin.item.*
+import dev.just.etb2cosmeticsevent.Main
 import dev.just.etb2cosmeticsevent.shop.buyableitems.adItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.badEffectItem
 import dev.just.etb2cosmeticsevent.shop.buyableitems.createHeadItem
@@ -42,6 +43,11 @@ fun inventory(player: Player): Inventory {
 class ShopInventory : Listener {
     @EventHandler
     fun onClick(event: PlayerInteractEvent) {
+        if (!Main.canPlayerLosePoints) {
+            event.player.sendMessage("${Main.prefix}${ChatColor.RED}Da du keine Punkte verlieren kannst, ist der" +
+                    " Shop deaktiviert! ")
+            return
+        }
         if (event.action == Action.RIGHT_CLICK_AIR || event.action == Action.RIGHT_CLICK_BLOCK) {
             if (event.isBlockInHand) {
                 val item: ItemStack = event.item!!

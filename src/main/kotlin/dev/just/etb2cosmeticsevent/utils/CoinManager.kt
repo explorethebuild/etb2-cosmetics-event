@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.entity.Player
 
 fun addCoins(player: Player, coins: Int): Unit {
-    if (!Main.canPlayerCoinsChange) return
+    if (!Main.canPlayerCollectPoints) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel == null) {
         val newPlayerModel: PlayerModel = PlayerModel()
@@ -25,7 +25,7 @@ fun addCoins(player: Player, coins: Int): Unit {
 }
 
 fun removeCoins(player: Player, coins: Int): Unit {
-    if (!Main.canPlayerCoinsChange) return
+    if (!Main.canPlayerLosePoints) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel != null) {
         playerModel.setCoins((playerModel.getCoins()!!.toInt() - coins).toString())
@@ -51,7 +51,7 @@ fun getCoins(player: Player): Int {
 }
 
 fun setCoins(player: Player, coins: Int): Unit {
-    if (!Main.canPlayerCoinsChange) return
+    if (!Main.canPlayerCollectPoints) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel != null) {
         val old: Int? = playerModel.getCoins()?.toIntOrNull()

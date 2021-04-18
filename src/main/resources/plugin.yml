@@ -14,3 +14,5 @@ commands:
     description: An admin command to manage coins from specific player
   startpvp:
     description: Start the pvp event
+  coincollectmanager:
+    description: Admin-only command.

@@ -1,4 +1,5 @@
 package dev.just.etb2cosmeticsevent
+import dev.just.etb2cosmeticsevent.commands.CoinCollectManagerCommand
 import dev.just.etb2cosmeticsevent.commands.CoinManagerCommand
 import dev.just.etb2cosmeticsevent.commands.EventInfoCommand
 import dev.just.etb2cosmeticsevent.listeners.BreakBlockListener
@@ -52,6 +53,7 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
         getCommand("giveshop")?.setExecutor(GiveShopItemCommand())
         getCommand("managecoins")?.setExecutor(CoinManagerCommand())
         getCommand("startpvp")?.setExecutor(PvPEventCommand())
+        getCommand("coincollectmanager")?.setExecutor(CoinCollectManagerCommand())
     }
     companion object {
         private fun coreProtectApi(): CoreProtectAPI? {
@@ -74,6 +76,7 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
          * Message that says the player hasn't the permissions for that command
          */
         val noPermission: String = "${prefix}${ChatColor.RED}You don't have the permissions to execute this command!"
-        var canPlayerCoinsChange: Boolean = false
+        var canPlayerCollectPoints: Boolean = false
+        var canPlayerLosePoints: Boolean = true
     }
 }

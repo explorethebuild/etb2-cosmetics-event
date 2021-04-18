@@ -22,8 +22,12 @@ class JoinListener : Listener {
         compc.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/eventinfo")
         event.player.spigot().sendMessage(ChatMessageType.CHAT, comp1, compc, comp2)
         setTab(event.player)
-        if (!Main.canPlayerCoinsChange) {
+        if (!Main.canPlayerCollectPoints) {
             event.player.sendMessage("${Main.prefix}Dein finaler Punktestand lautet: ${ChatColor.BLUE}${getCoins(event.player)}")
+        }
+        if (Main.canPlayerLosePoints) {
+            event.player.sendMessage("${Main.prefix}${ChatColor.RED}Um das Einkaufen weiter zu ermöglichen, kannst du" +
+                    " jedoch weiterhin Coins verlieren! ")
         }
     }
 }
