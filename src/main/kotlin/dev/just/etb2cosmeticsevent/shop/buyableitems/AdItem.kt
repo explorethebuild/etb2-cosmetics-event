@@ -36,8 +36,8 @@ val setTextItem: AnvilGUI.Builder = AnvilGUI.Builder()
         Bukkit.broadcastMessage("${ChatColor.GRAY}[${ChatColor.BLUE}Werbung${ChatColor.GRAY}] ${ChatColor.DARK_GRAY}" +
                 text
         )
-
-        return@onComplete AnvilGUI.Response.close()
+        player.closeInventory()
+        return@onComplete AnvilGUI.Response.text("Bitte warte kurz...")
     }
     .preventClose()
     .title("Welche Nachricht soll gesendet werden?")

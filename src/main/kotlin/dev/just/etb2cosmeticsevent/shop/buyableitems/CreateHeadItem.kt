@@ -64,8 +64,8 @@ val selectGui : AnvilGUI.Builder = AnvilGUI.Builder()
                 }
             }
         )
-        return@onComplete AnvilGUI.Response.close()
+        player.closeInventory()
+        return@onComplete AnvilGUI.Response.text("Bitte warte kurz...")
     }
-    .preventClose()
     .title("Welchem Spieler soll der Kopf gehören?")
     .plugin(Main.instance)
