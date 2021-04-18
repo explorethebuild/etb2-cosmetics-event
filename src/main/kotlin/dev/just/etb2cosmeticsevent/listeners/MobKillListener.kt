@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 class MobKillListener: Listener {
     @EventHandler
     public fun onMobKill(event: EntityDamageByEntityEvent) {
-        if (event !is LivingEntity)
+        if (event !is LivingEntity) return
         if (event.finalDamage < (event.entity as LivingEntity).health) return
         if (event.damager !is Player) return
         val entityType: EntityType = event.entity.type
