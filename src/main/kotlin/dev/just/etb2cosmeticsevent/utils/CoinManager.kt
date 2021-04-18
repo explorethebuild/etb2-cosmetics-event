@@ -1,5 +1,6 @@
 package dev.just.etb2cosmeticsevent.utils
 
+import dev.just.etb2cosmeticsevent.Main
 import dev.just.etb2cosmeticsevent.models.PlayerModel
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.ChatMessageType
@@ -8,6 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.entity.Player
 
 fun addCoins(player: Player, coins: Int): Unit {
+    if (!Main.canPlayerCoinsChange) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel == null) {
         val newPlayerModel: PlayerModel = PlayerModel()
@@ -23,6 +25,7 @@ fun addCoins(player: Player, coins: Int): Unit {
 }
 
 fun removeCoins(player: Player, coins: Int): Unit {
+    if (!Main.canPlayerCoinsChange) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel != null) {
         playerModel.setCoins((playerModel.getCoins()!!.toInt() - coins).toString())
@@ -48,6 +51,7 @@ fun getCoins(player: Player): Int {
 }
 
 fun setCoins(player: Player, coins: Int): Unit {
+    if (!Main.canPlayerCoinsChange) return
     val playerModel: PlayerModel? = jsonDBTemplate.findById(player.uniqueId.toString(), PlayerModel::class.java)
     if (playerModel != null) {
         val old: Int? = playerModel.getCoins()?.toIntOrNull()

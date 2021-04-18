@@ -74,5 +74,6 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
          * Message that says the player hasn't the permissions for that command
          */
         val noPermission: String = "${prefix}${ChatColor.RED}You don't have the permissions to execute this command!"
+        var canPlayerCoinsChange: Boolean = false
     }
 }

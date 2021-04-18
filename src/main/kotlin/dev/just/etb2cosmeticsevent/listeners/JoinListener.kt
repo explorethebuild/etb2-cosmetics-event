@@ -1,6 +1,7 @@
 package dev.just.etb2cosmeticsevent.listeners
 
 import dev.just.etb2cosmeticsevent.Main
+import dev.just.etb2cosmeticsevent.utils.getCoins
 import dev.just.etb2cosmeticsevent.utils.setTab
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.ChatMessageType
@@ -21,5 +22,8 @@ class JoinListener : Listener {
         compc.clickEvent = ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/eventinfo")
         event.player.spigot().sendMessage(ChatMessageType.CHAT, comp1, compc, comp2)
         setTab(event.player)
+        if (!Main.canPlayerCoinsChange) {
+            event.player.sendMessage("${Main.prefix}Dein finaler Punktestand lautet: ${ChatColor.BLUE}${getCoins(event.player)}")
+        }
     }
 }
