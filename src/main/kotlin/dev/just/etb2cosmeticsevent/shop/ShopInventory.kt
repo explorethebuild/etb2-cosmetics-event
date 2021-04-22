@@ -43,16 +43,16 @@ fun inventory(player: Player): Inventory {
 class ShopInventory : Listener {
     @EventHandler
     fun onClick(event: PlayerInteractEvent) {
-        if (!Main.canPlayerLosePoints) {
-            event.player.sendMessage("${Main.prefix}${ChatColor.RED}Da du keine Punkte verlieren kannst, ist der" +
-                    " Shop deaktiviert! ")
-            return
-        }
         if (event.action == Action.RIGHT_CLICK_AIR || event.action == Action.RIGHT_CLICK_BLOCK) {
             if (event.isBlockInHand) {
                 val item: ItemStack = event.item!!
                 if (item.type == Material.BARREL && item.hasItemMeta() && item.itemMeta!!.hasDisplayName() &&
                     item.itemMeta!!.displayName == "${ChatColor.BLUE}Shop") {
+                    if (!Main.canPlayerLosePoints) {
+                        event.player.sendMessage("${Main.prefix}${ChatColor.RED}Da du keine Punkte verlieren kannst, ist der" +
+                                " Shop deaktiviert! ")
+                        return
+                    }
                     event.isCancelled = true
                     event.player.openInventory(inventory(event.player))
                 }

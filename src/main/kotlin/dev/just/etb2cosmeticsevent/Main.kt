@@ -77,6 +77,6 @@ public class Main : JavaPlugin(), Listener, CommandExecutor {
          */
         val noPermission: String = "${prefix}${ChatColor.RED}You don't have the permissions to execute this command!"
         var canPlayerCollectPoints: Boolean = false
-        var canPlayerLosePoints: Boolean = true
+        var canPlayerLosePoints: Boolean = false
     }
 }
